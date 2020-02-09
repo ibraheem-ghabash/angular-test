@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { PatientsService } from './patients.service';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector:'patients',
   template: `
   <h2>{{title}}</h2>
+  <div style="margin:15px;">
+  <a href="#"><button type="button" class="btn btn-info btn-lg" (click)="AddPatient()">New Patient</button></a>
+  </div>
   <table id="mytable" class="table table-bordred table-striped">
      <thead>
         <th>Name</th>
@@ -34,7 +38,7 @@ export class PatientsComponent{
         isActive = true;
         patients : any[];
 
-        constructor(private http: Http){
+        constructor(private http: Http, private router: Router){
           let result = http.get("https://localhost:44375/api/ManteqApi").subscribe(response => {
             this.patients = response.json();
             //console.log( response.json());
@@ -42,11 +46,13 @@ export class PatientsComponent{
         }
 
         deletePatient(patient){
-          //if(confirm(patient.id)){}
           if(confirm('Are you sure you want to delete this patient?'))
-          //this.http.delete("https://localhost:44375/api/ManteqApi/"+patientId).subscribe(response=>{
-            //this.patients.splice(this.patients.findIndex(x=>{x.id = patientId}),1);
+          this.http.delete("https://localhost:44375/api/ManteqApi/" + patient.id).subscribe(response=>{
             this.patients.splice(this.patients.indexOf(patient),1);
-          //});
+          });
+        }
+
+        AddPatient(){
+          this.router.navigate(['add-patient']);
         }
 }

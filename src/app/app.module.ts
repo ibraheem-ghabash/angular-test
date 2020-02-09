@@ -6,12 +6,16 @@ import { NgModule } from '@angular/core';
 import { PatientsComponent } from './patients.component';
 import { PatientComponent } from './patient/patient.component';
 import { PatientsService } from './patients.service';
+import { PatientAddComponent } from './patient-add/patient-add.component';
+import { PatientEditComponent } from './patient-edit/patient-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PatientsComponent,
-    PatientComponent
+    PatientComponent,
+    PatientAddComponent,
+    PatientEditComponent
   ],
   imports: [
     BrowserModule,
