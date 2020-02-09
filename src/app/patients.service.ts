@@ -1,3 +1,5 @@
+import {HttpModule} from '@angular/http';
+
 export class PatientsService {
       getPatients(){
         return [{
